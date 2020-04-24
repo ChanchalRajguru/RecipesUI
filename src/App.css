@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+.alertbtn{
+  width:30%!important;
+  font-weight: bold;
+
+}
+
+.header {
+  overflow: hidden;
+  background-color: black;
+  padding: 20px 10px;
+  color:white;
+  text-align: center;
+}
+.imgnew{
+  border-radius: 50%;
+  width:7%;
+  height:7%;
+}

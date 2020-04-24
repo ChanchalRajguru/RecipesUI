@@ -1,0 +1,13 @@
+.mainBox{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black;
+    color:white;
+
+}
+.newcard{
+    background-color: lightseagreen;
+    color:black;
+    text-align: center;
+}

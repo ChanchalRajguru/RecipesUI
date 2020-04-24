@@ -3,15 +3,20 @@ import axios from 'axios';
 import './App.css';
 import RecipeSummaryItem from './RecipeSummary/RecipeSummaryItem'
 import RecipeDetails from './RecipeDetails/RecipeDetails'
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Logo from './logoimg.jpg';
 
 class App extends Component {
 
   newRecipeTemplate = {
     id: '',
     name: '',
-    author:'',
-    preparationTime:'',
-    description:''
+    author: '',
+    preparationTime: '',
+    description: ''
   }
 
   state = {
@@ -21,14 +26,14 @@ class App extends Component {
   }
 
   fetchRecipeSummaries = () => {
-    axios.get('http://localhost:8080/recipes/summary/')
+    axios.get('http://localhost:8080/recipes/summary?page=0&size=2&sort=name')
       .then(response => {
         this.setState({
           recipesummaries: response.data,
           selectedRecipe: null,
         });
       }).catch(error => {
-       console.log(error.response.status);
+        console.log(error.response.status);
         this.setState({
           fetchError: true
         })
@@ -99,7 +104,7 @@ class App extends Component {
       })
     }
 
-    let recipeDetails = <p>Please select a recipe to view details</p>
+    let recipeDetails = <Alert variant="info" className="alertbtn">Please select a recipe to view details</Alert>
     if (this.state.selectedRecipe) {
       recipeDetails = <RecipeDetails recipe={this.state.selectedRecipe}
         valueChanged={(event) => this.recipeDetailsChangedHandler(event)}
@@ -108,10 +113,17 @@ class App extends Component {
         newClickHandler={() => this.newRecipeHandler(this.state.selectedRecipe.id)} />
     }
     return (
-      <div>
-        {recipeSummariesList}
-        <hr />
-        {recipeDetails}
+      <div xs={12}>
+        <h2 className="header"><img className="imgnew" src={Logo}/> Awesome Recipes</h2><br/>
+        <Row>
+          <Col>
+            {recipeSummariesList}
+          </Col>
+          <hr />
+          <Col>
+            {recipeDetails}
+          </Col>
+        </Row>
       </div>
     );
   }
